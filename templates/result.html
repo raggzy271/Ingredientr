@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Ingredientr has spoken!
+{% endblock title%}
+
+{% block body %}
+<section id="result">
+    <h2>This is <span class="capitalize">{{title}}</span></h2>
+    <div id="img-view">
+        <img src="{{imageSrc}}" alt="{{title}}" id="imageUploaded">
+        <button id="get-ingrs">Get Ingredients!</button>
+    </div>
+    <div id="ingrs-view">
+        <p id="ingrs-title">Ingredients</p>
+        <ul id="ingrs">
+            {% for ingr in ingrs %}
+            <li class="ingr capitalize">{{ingr}}</li>
+            {% endfor %}
+        </ul>
+        <a href="/" id="start-over">Start Over &#x21ba;</a>
+    </div>
+</section>
+
+<script src="../static/result-page-script.js"></script>
+
+{% endblock body %}

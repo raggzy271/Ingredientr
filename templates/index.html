@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Ingredientr - Predict Food Ingredients from Images
+{% endblock title%}
+
+{% block body %}
+<section id="upload-section">
+    <div id="upload-region">
+        <h2>Upload a food item (or drag &amp; drop)!</h2>
+        <form id="upload-form" method="POST" enctype="multipart/form-data" class="dropzone">
+            {% csrf_token %}
+            <input type="file" accept="image/jpeg, image/png" id="upload-input" name="image">
+            <label for="upload-input"><img src="../static/upload-icon.png" id="upload-icon"></label>
+        </form>
+        <div id="drop-message">
+            Drop it like it's hot!
+        </div>
+    </div>
+    <div id="image-preview">
+        <img id="cancel" src="../static/remove-button.png">
+        <img id="toUpload">
+        <button id="upload-btn" type="submit" form="upload-form">Upload!</button>
+    </div>
+    <div id="loader"></div>
+</section>
+
+
+<script src="../static/script.js"></script>
+{% endblock body %}
