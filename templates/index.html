@@ -1,30 +1,31 @@
 {% extends 'base.html' %}
+{% load static %} 
 
 {% block title %}
-Ingredientr - Predict Food Ingredients from Images
+Ingredientr - Predict Recipes from Images
 {% endblock title%}
 
 {% block body %}
 <section id="upload-section">
     <div id="upload-region">
         <h2>Upload a food item (or drag &amp; drop)!</h2>
-        <form id="upload-form" method="POST" enctype="multipart/form-data" class="dropzone">
+        <form id="upload-form" method="POST" enctype="multipart/form-data" novalidate>
             {% csrf_token %}
-            <input type="file" accept="image/jpeg, image/png" id="upload-input" name="image">
-            <label for="upload-input"><img src="../static/upload-icon.png" id="upload-icon"></label>
+            <i class="fa fa-file"></i>
+            <input type="file" accept="image/jpeg, image/png" id="upload-input" name="image" required>
+            <label for="upload-input"><img src="{% static 'upload-icon.png' %}" id="upload-icon"></label>
         </form>
         <div id="drop-message">
             Drop it like it's hot!
         </div>
     </div>
     <div id="image-preview">
-        <img id="cancel" src="../static/remove-button.png">
-        <img id="toUpload">
+        <img id="image-to-upload">
+        <button id="remove-image-btn">Remove</button>
         <button id="upload-btn" type="submit" form="upload-form">Upload!</button>
     </div>
     <div id="loader"></div>
 </section>
 
-
-<script src="../static/script.js"></script>
+<script src="{% static 'script.js' %}"></script>
 {% endblock body %}

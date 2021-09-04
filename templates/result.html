@@ -1,27 +1,30 @@
 {% extends 'base.html' %}
-
+{% load static %} 
 {% block title %}
-Ingredientr has spoken!
-{% endblock title%}
+{{ title | title }}
+{% endblock title %}
 
 {% block body %}
 <section id="result">
-    <h2>This is <span class="capitalize">{{title}}</span></h2>
-    <div id="img-view">
-        <img src="{{imageSrc}}" alt="{{title}}" id="imageUploaded">
-        <button id="get-ingrs">Get Ingredients!</button>
-    </div>
-    <div id="ingrs-view">
-        <p id="ingrs-title">Ingredients</p>
+    <h2>{{ title | title }}</h2>
+    <img src="/media/{{ imageFileName }}" alt="{{ title | title }}" id="image-uploaded">
+    <div id="recipe">
+        <h3 id="ingrs-title">Ingredients</h3>
         <ul id="ingrs">
             {% for ingr in ingrs %}
-            <li class="ingr capitalize">{{ingr}}</li>
+            <li class="ingr">{{ ingr | title }}</li>
+            {% endfor %}
+        </ul>
+        <h3 id="instructions-title">Instructions</h3>
+        <ul id="instructions">
+            {% for instruction in recipe %}
+            <li class="recipe-instruction">{{ instruction }}</li>
             {% endfor %}
         </ul>
         <a href="/" id="start-over">Start Over &#x21ba;</a>
     </div>
 </section>
 
-<script src="../static/result-page-script.js"></script>
+<script src="{% static 'result-page-script.js' %}"></script>
 
 {% endblock body %}

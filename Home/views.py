@@ -1,18 +1,23 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.core.files.storage import FileSystemStorage
 from Home.inverse_cooking_model.src import predictr
 
-# Create your views here.
-
 def index(request):
-    # Handling form submissions
+    # If it a redirect from the form
+    result = request.session.get('result')
+    if result:
+        del(request.session['result'])
+        return render(request, 'result.html', result)
+
+    # If it is a form submission
     if request.method == 'POST' and request.FILES.get('image'):
         uploadedImage = request.FILES.get('image')
         imageFileName = FileSystemStorage().save(uploadedImage.name, uploadedImage)
         
-        result = predictr.getIngredients(use_urls=False, imageFileName=imageFileName)
-        result['imageSrc'] = '/static/' + imageFileName
+        result = predictr.getRecipe(imageFileName)
+        result['imageFileName'] = imageFileName
+        request.session['result'] = result
+        return redirect('/')
 
-        return render(request, 'result.html', result)
-
+    # If it a request to load the home page
     return render(request, 'index.html')

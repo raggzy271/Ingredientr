@@ -1,3 +1,4 @@
+{% load static %} 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,16 +7,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock title %}</title>
-    <link rel="stylesheet" href="../static/styles.css">
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
 </head>
 
 <body>
     <header>
         <h1>Ingredientr</h1>
-        <p id="subtitle">Predict Food Ingredients from Images!</p>
+        <p id="subtitle">Predict Recipes from Images!</p>
     </header>
     
     {% block body %}{% endblock body %}
+
+    <footer>
+        <p><a href="https://github.com/facebookresearch/inversecooking" target="_blank" class="footer-link">Model built by Salvador, Amaia and Drozdzal, Michal and Giro-i-Nieto, Xavier and Romero, Adriana.</a></p>
+        <p>Website designed by <a href="https://github.com/raggzy271" target="_blank" class="footer-link">Raghav</a></p>
+    </footer>
 </body>
 
 </html>
